@@ -1,0 +1,725 @@
+﻿/* EstateVault PG Owner Portal — dark premium theme */
+@import url("portal-mobile.css");
+
+:root {
+  --pgo-bg: #030712;
+  --pgo-navy: #0a0f1e;
+  --pgo-panel: #0f172a;
+  --pgo-royal: #2563eb;
+  --pgo-royal-glow: rgba(37, 99, 235, 0.45);
+  --pgo-silver: #cbd5e1;
+  --pgo-gold: #d4af37;
+  --pgo-gold-dim: #b8860b;
+  --pgo-neon: #60a5fa;
+  --pgo-neon-cyan: #22d3ee;
+  --pgo-glass: rgba(15, 23, 42, 0.72);
+  --pgo-glass-border: rgba(255, 255, 255, 0.1);
+  --pgo-text: #f1f5f9;
+  --pgo-muted: #94a3b8;
+  --pgo-success: #22c55e;
+  --pgo-danger: #ef4444;
+  --pgo-sidebar-w: 260px;
+  --pgo-topbar-h: 64px;
+  --pgo-radius: 16px;
+  --pgo-radius-sm: 12px;
+  --pgo-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; }
+
+body.pgo-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--pgo-text);
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, var(--pgo-royal-glow), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(212, 175, 55, 0.12), transparent 45%),
+    linear-gradient(165deg, var(--pgo-bg) 0%, var(--pgo-navy) 40%, #000 100%);
+}
+
+.pgo-bg-grid::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Nav */
+.pgo-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.75rem;
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--pgo-glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+.pgo-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--pgo-gold);
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.pgo-brand-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--pgo-royal), #1d4ed8);
+  color: #fff;
+  box-shadow: 0 0 12px var(--pgo-royal-glow);
+}
+
+.pgo-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Glass cards */
+.pgo-glass {
+  background: var(--pgo-glass);
+  border: 1px solid var(--pgo-glass-border);
+  border-radius: var(--pgo-radius);
+  padding: 1.75rem 2rem;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--pgo-shadow);
+}
+
+.pgo-glass-neon {
+  box-shadow:
+    var(--pgo-shadow),
+    0 0 0 1px rgba(37, 99, 235, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Buttons */
+.pgo-btn-primary,
+.pgo-btn-outline,
+.pgo-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: var(--pgo-radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.pgo-btn-primary {
+  background: linear-gradient(135deg, var(--pgo-royal), #1d4ed8);
+  color: #fff;
+  box-shadow: 0 8px 28px var(--pgo-royal-glow);
+}
+
+.pgo-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px var(--pgo-royal-glow), 0 0 20px rgba(96, 165, 250, 0.25);
+}
+
+.pgo-btn-gold {
+  background: linear-gradient(135deg, var(--pgo-gold), var(--pgo-gold-dim));
+  color: var(--pgo-navy);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+}
+
+.pgo-btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+}
+
+.pgo-btn-outline {
+  background: transparent;
+  color: var(--pgo-text);
+  border: 1px solid var(--pgo-glass-border);
+}
+
+.pgo-btn-outline:hover {
+  border-color: var(--pgo-neon);
+  color: var(--pgo-neon);
+  box-shadow: 0 0 16px rgba(96, 165, 250, 0.2);
+}
+
+.pgo-btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--pgo-muted);
+}
+
+.pgo-btn-ghost:hover { color: var(--pgo-text); background: rgba(255, 255, 255, 0.08); }
+
+.pgo-btn-primary:disabled,
+.pgo-btn-gold:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Forms */
+.pgo-form-grid { display: grid; gap: 1.25rem; }
+.pgo-form-row-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1rem;
+  align-items: start;
+}
+.pgo-form-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem 1rem;
+  align-items: start;
+}
+
+.pgo-form-group { position: relative; margin-bottom: 0; min-width: 0; }
+
+.pgo-form-group--select .pgo-floating-label {
+  top: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--pgo-gold);
+}
+.pgo-form-group--select .pgo-form-select {
+  padding-top: 1.4rem;
+  padding-bottom: 0.65rem;
+  min-height: 3rem;
+}
+
+.pgo-form-control,
+.pgo-form-select {
+  width: 100%;
+  padding: 1rem 0.9rem 0.5rem;
+  border-radius: var(--pgo-radius-sm);
+  border: 1px solid var(--pgo-glass-border);
+  background: rgba(3, 7, 18, 0.65);
+  color: var(--pgo-text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pgo-form-control:focus,
+.pgo-form-select:focus {
+  border-color: var(--pgo-royal);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3), 0 0 20px rgba(37, 99, 235, 0.15);
+}
+
+.pgo-form-control.valid { border-color: var(--pgo-success); }
+.pgo-form-control.invalid { border-color: var(--pgo-danger); }
+
+.pgo-floating-label {
+  position: absolute;
+  left: 0.9rem;
+  top: 1rem;
+  color: var(--pgo-muted);
+  pointer-events: none;
+  transition: 0.2s;
+  font-size: 0.9rem;
+}
+
+.pgo-form-control:focus + .pgo-floating-label,
+.pgo-form-control:not(:placeholder-shown) + .pgo-floating-label,
+.pgo-form-select:focus + .pgo-floating-label,
+.pgo-form-select:valid + .pgo-floating-label {
+  top: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--pgo-gold);
+}
+
+.pgo-field-error {
+  color: var(--pgo-danger);
+  font-size: 0.78rem;
+  min-height: 1rem;
+  margin-top: 0.3rem;
+}
+
+.pgo-pwd-wrap { position: relative; }
+
+.pgo-pwd-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--pgo-muted);
+  cursor: pointer;
+}
+
+.pgo-strength-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  margin-top: 0.4rem;
+  overflow: hidden;
+}
+
+.pgo-strength-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  transition: width 0.3s, background 0.3s;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.pgo-form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--pgo-muted);
+}
+
+.pgo-form-check input { margin-top: 0.2rem; accent-color: var(--pgo-royal); }
+
+.pgo-profile-preview {
+  display: none;
+  max-width: 96px;
+  max-height: 96px;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  border: 2px solid var(--pgo-gold);
+  object-fit: cover;
+}
+
+/* OTP */
+.pgo-otp-inputs {
+  display: flex;
+  gap: 0.55rem;
+  justify-content: center;
+  margin: 1.25rem 0;
+}
+
+.pgo-otp-inputs input {
+  width: 46px;
+  height: 54px;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 600;
+  border-radius: var(--pgo-radius-sm);
+  border: 1px solid var(--pgo-glass-border);
+  background: rgba(3, 7, 18, 0.7);
+  color: var(--pgo-text);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.pgo-otp-inputs input:focus {
+  border-color: var(--pgo-neon);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.35), 0 0 16px rgba(34, 211, 238, 0.2);
+  transform: scale(1.05);
+  outline: none;
+}
+
+.pgo-dev-otp-banner {
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  background: rgba(37, 99, 235, 0.12) !important;
+  color: #fef3c7 !important;
+  border-radius: var(--pgo-radius-sm) !important;
+  padding: 1rem;
+}
+
+/* Loader & toast (agent-scoped aliases work with shared IDs) */
+.pgo-loader-overlay,
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.pgo-loader-overlay.active,
+.loader-overlay.active { display: flex; }
+
+.pgo-spinner,
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--pgo-neon);
+  border-radius: 50%;
+  animation: AgentSpin 0.8s linear infinite;
+  box-shadow: 0 0 24px var(--pgo-royal-glow);
+}
+
+@keyframes AgentSpin { to { transform: rotate(360deg); } }
+
+.toast-container {
+  position: fixed;
+  top: 80px;
+  right: 1rem;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast-msg {
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--pgo-radius-sm);
+  background: var(--pgo-panel);
+  border: 1px solid var(--pgo-glass-border);
+  color: var(--pgo-text);
+  box-shadow: var(--pgo-shadow);
+  animation: AgentToastIn 0.35s ease;
+}
+
+.toast-msg.success { border-left: 4px solid var(--pgo-success); }
+.toast-msg.error { border-left: 4px solid var(--pgo-danger); }
+
+@keyframes AgentToastIn {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Dashboard layout */
+.pgo-dashboard-wrap {
+  display: flex;
+  min-height: calc(100vh - var(--pgo-topbar-h));
+  position: relative;
+  z-index: 1;
+}
+
+.pgo-sidebar {
+  width: var(--pgo-sidebar-w);
+  flex-shrink: 0;
+  background: rgba(3, 7, 18, 0.95);
+  border-right: 1px solid var(--pgo-glass-border);
+  padding: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.pgo-sidebar-brand {
+  padding: 0 1.25rem 1.25rem;
+  border-bottom: 1px solid var(--pgo-glass-border);
+  margin-bottom: 0.75rem;
+}
+
+.pgo-sidebar-brand span {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pgo-muted);
+  margin-bottom: 0.25rem;
+}
+
+.pgo-sidebar-brand strong {
+  color: var(--pgo-gold);
+  font-size: 1.05rem;
+}
+
+.pgo-sidebar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.pgo-sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.25rem;
+  color: var(--pgo-muted);
+  text-decoration: none;
+  font-size: 0.92rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.pgo-sidebar-nav a:hover,
+.pgo-sidebar-nav a.active {
+  color: var(--pgo-text);
+  background: rgba(37, 99, 235, 0.12);
+  border-left-color: var(--pgo-neon);
+}
+
+.pgo-sidebar-nav a.active {
+  color: var(--pgo-neon);
+  box-shadow: inset 0 0 24px rgba(37, 99, 235, 0.08);
+}
+
+.pgo-sidebar-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--pgo-glass-border);
+}
+
+.pgo-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pgo-topbar {
+  height: var(--pgo-topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid var(--pgo-glass-border);
+  backdrop-filter: blur(12px);
+}
+
+.pgo-topbar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.pgo-topbar-title span { color: var(--pgo-gold); }
+
+.pgo-profile-dropdown {
+  position: relative;
+}
+
+.pgo-profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--pgo-radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--pgo-glass-border);
+  cursor: pointer;
+  color: var(--pgo-text);
+}
+
+.pgo-profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--pgo-royal), var(--pgo-gold-dim));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.pgo-profile-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: var(--pgo-panel);
+  border: 1px solid var(--pgo-glass-border);
+  border-radius: var(--pgo-radius-sm);
+  box-shadow: var(--pgo-shadow);
+  padding: 0.5rem;
+  display: none;
+  z-index: 200;
+}
+
+.pgo-profile-menu.open { display: block; animation: AgentToastIn 0.25s ease; }
+
+.pgo-profile-menu a,
+.pgo-profile-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  color: var(--pgo-muted);
+  text-decoration: none;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.pgo-profile-menu a:hover,
+.pgo-profile-menu button:hover {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--pgo-text);
+}
+
+.pgo-content {
+  padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.pgo-welcome-banner {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--pgo-radius);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(212, 175, 55, 0.08));
+  border: 1px solid rgba(37, 99, 235, 0.35);
+}
+
+.pgo-welcome-banner h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+}
+
+.pgo-welcome-banner h1 em {
+  font-style: normal;
+  color: var(--pgo-neon);
+  text-shadow: 0 0 24px rgba(96, 165, 250, 0.5);
+}
+
+.pgo-welcome-banner p {
+  margin: 0;
+  color: var(--pgo-muted);
+  font-size: 0.95rem;
+}
+
+.pgo-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pgo-stat-card {
+  padding: 1.15rem 1.25rem;
+  border-radius: var(--pgo-radius);
+  background: var(--pgo-glass);
+  border: 1px solid var(--pgo-glass-border);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.pgo-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(96, 165, 250, 0.15);
+}
+
+.pgo-stat-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--pgo-muted);
+  margin-bottom: 0.35rem;
+}
+
+.pgo-stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--pgo-silver);
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.pgo-stat-value.gold { color: var(--pgo-gold); }
+.pgo-stat-value.neon { color: var(--pgo-neon); }
+
+.pgo-panel {
+  background: var(--pgo-glass);
+  border: 1px solid var(--pgo-glass-border);
+  border-radius: var(--pgo-radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.pgo-panel h3 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--pgo-silver);
+}
+
+.pgo-activity-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pgo-activity-item {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pgo-activity-item:last-child { border-bottom: none; }
+
+.pgo-activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pgo-neon);
+  box-shadow: 0 0 10px var(--pgo-neon);
+  margin-top: 0.45rem;
+  flex-shrink: 0;
+}
+
+.pgo-activity-item p { margin: 0 0 0.2rem; font-size: 0.92rem; }
+.pgo-activity-item time { font-size: 0.78rem; color: var(--pgo-muted); }
+
+.pgo-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.pgo-chart-placeholder {
+  min-height: 220px;
+  border-radius: var(--pgo-radius-sm);
+  border: 1px dashed rgba(96, 165, 250, 0.35);
+  background: rgba(3, 7, 18, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pgo-muted);
+  font-size: 0.9rem;
+}
+
+.pgo-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.pgo-meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.pgo-meta-pills span {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  color: var(--pgo-muted);
+}
+
+@media (max-width: 992px) {
+  .pgo-charts-row,
+  .pgo-grid-2,
+  .pgo-form-row-2,
+  .pgo-form-row-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 576px) {
+  .pgo-glass { padding: 1.25rem; }
+  .pgo-nav { padding: 0.75rem 1rem; }
+}
+

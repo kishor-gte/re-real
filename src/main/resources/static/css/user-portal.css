@@ -1,0 +1,221 @@
+/* User portal layout with responsive sidebar */
+.user-portal-page {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.user-portal-topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.user-portal-topnav .brand {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.user-sidebar-toggle {
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.4rem 0.65rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.user-sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.65);
+  z-index: 250;
+}
+
+.user-sidebar-backdrop.open {
+  display: block;
+}
+
+.user-portal-wrap {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 3.5rem;
+}
+
+.user-sidebar {
+  width: 268px;
+  flex-shrink: 0;
+  background: rgba(15, 23, 42, 0.98);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  bottom: 0;
+  z-index: 260;
+  overflow-y: auto;
+  transition: transform 0.25s ease;
+}
+
+.user-sidebar-brand {
+  padding: 0 0.35rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 0.75rem;
+}
+
+.user-sidebar-brand span {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+
+.user-sidebar-brand strong {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.user-sidebar-profile {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.65rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.user-sidebar-avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #b8962e);
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.user-sidebar-profile strong {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--text);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.user-sidebar-profile span {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.user-sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.user-sidebar-nav li {
+  margin-bottom: 0.15rem;
+}
+
+.user-sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.86rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.user-sidebar-nav a:hover,
+.user-sidebar-nav a.active {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--gold);
+}
+
+.user-sidebar-footer {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.user-sidebar-footer .btn-outline {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.user-portal-main {
+  flex: 1;
+  margin-left: 268px;
+  padding: 1.25rem 1.5rem 2.5rem;
+  width: calc(100% - 268px);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.user-portal-main .auth-container.wide {
+  max-width: none;
+  padding: 0;
+}
+
+@media (max-width: 992px) {
+  .user-sidebar-toggle {
+    display: inline-block;
+  }
+
+  .user-sidebar {
+    transform: translateX(-100%);
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .user-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .user-portal-main {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .user-portal-wrap {
+    padding-top: 3.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .user-portal-topnav {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .user-portal-main {
+    padding: 0.75rem;
+  }
+}

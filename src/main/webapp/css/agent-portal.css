@@ -1,0 +1,100 @@
+/* Agent portal pages: analytics, earnings, referrals, messages, notifications */
+@import url("portal-mobile.css");
+
+.ap-layout { display: flex; flex-direction: column; gap: 1.25rem; }
+.ap-panel {
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  backdrop-filter: blur(10px);
+}
+.ap-panel h3 { font-size: 1.05rem; margin: 0 0 0.75rem; color: #f8fafc; }
+.ap-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.85rem;
+}
+.ap-kpi {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+.ap-kpi label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.04em; display: block; }
+.ap-kpi strong { font-size: 1.25rem; color: #d4af37; display: block; margin-top: 0.2rem; }
+.ap-kpi strong.neon { color: #5eead4; }
+.ap-bar-chart { display: flex; align-items: flex-end; gap: 0.5rem; height: 120px; margin-top: 0.5rem; }
+.ap-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.ap-bar {
+  width: 100%;
+  max-width: 48px;
+  background: linear-gradient(180deg, #d4af37, rgba(212, 175, 55, 0.3));
+  border-radius: 6px 6px 0 0;
+  min-height: 4px;
+}
+.ap-bar-label { font-size: 0.65rem; color: #64748b; text-align: center; }
+.ap-table { width: 100%; font-size: 0.88rem; }
+.ap-table th { color: #94a3b8; font-weight: 600; padding: 0.5rem; }
+.ap-table td { padding: 0.55rem 0.5rem; border-top: 1px solid rgba(148, 163, 184, 0.1); color: #e2e8f0; vertical-align: top; }
+.ap-notif-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.ap-notif-card {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  background: rgba(15, 23, 42, 0.5);
+  transition: border-color 0.2s;
+}
+.ap-notif-card.unread { border-left: 3px solid #d4af37; }
+.ap-notif-head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.ap-notif-title { font-weight: 600; color: #f8fafc; margin: 0; }
+.ap-notif-meta { font-size: 0.75rem; color: #64748b; }
+.ap-notif-msg { color: #cbd5e1; font-size: 0.9rem; margin: 0.5rem 0; }
+.ap-notif-details { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.35rem 1rem; margin-top: 0.65rem; font-size: 0.8rem; }
+.ap-notif-details dt { color: #64748b; margin: 0; }
+.ap-notif-details dd { color: #e2e8f0; margin: 0 0 0.35rem; }
+.ap-cat-pill {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  margin-right: 0.35rem;
+}
+.ap-cat-pill.lead { background: rgba(94, 234, 212, 0.15); color: #5eead4; }
+.ap-cat-pill.booking { background: rgba(96, 165, 250, 0.15); color: #60a5fa; }
+.ap-cat-pill.subscription { background: rgba(212, 175, 55, 0.15); color: #d4af37; }
+.ap-cat-pill.payment { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+.ap-filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.ap-filter-bar button {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  color: #cbd5e1;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.ap-filter-bar button.active { border-color: #d4af37; color: #d4af37; }
+.ap-msg-card {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: rgba(15, 23, 42, 0.45);
+}
+.ap-msg-from { font-weight: 600; color: #f8fafc; }
+.ap-msg-preview { color: #94a3b8; font-size: 0.88rem; margin-top: 0.35rem; }
+
+@media (max-width: 992px) {
+  .ap-stats-row,
+  .ap-earnings-grid,
+  .ap-referral-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ap-filter-bar {
+    flex-wrap: wrap;
+  }
+}

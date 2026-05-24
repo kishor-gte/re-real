@@ -1,0 +1,171 @@
+@import url("portal-mobile.css");
+
+.pgo-nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.35rem;
+  margin-left: 0.35rem;
+  border-radius: 999px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.pgo-bookings-sub {
+  color: var(--pgo-muted);
+  font-size: 0.9rem;
+}
+
+.pgo-bookings-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  color: var(--pgo-muted);
+}
+
+.pgo-bookings-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.pgo-booking-card {
+  padding: 1.25rem;
+}
+
+.pgo-booking-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.pgo-booking-code {
+  display: block;
+  color: var(--pgo-muted);
+  font-size: 0.85rem;
+  margin-top: 0.15rem;
+}
+
+.pgo-booking-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pgo-booking-badge--pending {
+  background: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+  border: 1px solid rgba(234, 179, 8, 0.35);
+}
+
+.pgo-booking-badge--approved {
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.pgo-booking-badge--rejected {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.pgo-booking-meta {
+  margin: 0.35rem 0;
+  color: var(--pgo-muted);
+  font-size: 0.92rem;
+}
+
+.pgo-booking-guests {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.pgo-booking-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.pgo-booking-actions .btn-success {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
+.pgo-booking-actions .btn-outline-danger {
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+}
+
+.pgo-booking-actions .btn-outline-danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fff;
+}
+
+.pgo-booking-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.65rem 1rem;
+  margin: 0.85rem 0;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.pgo-booking-detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.pgo-booking-detail-row span {
+  color: var(--pgo-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pgo-booking-detail-row strong {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.pgo-booking-guests-wrap {
+  margin-top: 0.5rem;
+}
+
+.pgo-booking-guests-wrap strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--pgo-muted);
+}
+
+.pgo-booking-card--approved {
+  border-left: 3px solid #22c55e;
+}
+
+.pgo-booking-card--pending {
+  border-left: 3px solid #eab308;
+}
+
+.pgo-booking-card--rejected {
+  border-left: 3px solid #ef4444;
+}

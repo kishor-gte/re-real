@@ -1,0 +1,367 @@
+/**
+ * Agent User Bookings — dedicated stylesheet (loaded after agent.css)
+ */
+.agent-bookings-page .agent-content.ab-layout {
+  max-width: 1320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* —— Overview panel —— */
+.agent-bookings-page .ab-panel {
+  background: var(--agent-glass, rgba(15, 23, 42, 0.72));
+  border: 1px solid var(--agent-glass-border, rgba(255, 255, 255, 0.1));
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem;
+}
+.agent-bookings-page .ab-panel-head {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.agent-bookings-page .ab-panel-title {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--agent-text, #e2e8f0);
+}
+.agent-bookings-page .ab-panel-desc {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--agent-muted, #94a3b8);
+}
+.agent-bookings-page .ab-count-badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--agent-gold, #d4af37);
+  vertical-align: middle;
+}
+
+.agent-bookings-page .ab-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+.agent-bookings-page .ab-kpi-card {
+  padding: 0.75rem 0.5rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+.agent-bookings-page .ab-kpi-label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--agent-muted, #94a3b8);
+  margin-bottom: 0.3rem;
+}
+.agent-bookings-page .ab-kpi-val {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--agent-silver, #f1f5f9);
+  font-variant-numeric: tabular-nums;
+}
+.agent-bookings-page .ab-kpi-val.neon { color: var(--agent-neon, #60a5fa); }
+.agent-bookings-page .ab-kpi-val.gold { color: var(--agent-gold, #d4af37); }
+
+.agent-bookings-page .ab-empty {
+  padding: 2rem;
+  text-align: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+}
+.agent-bookings-page .ab-empty p { margin: 0 0 0.35rem; color: var(--agent-text, #e2e8f0); }
+.agent-bookings-page .ab-empty-hint { font-size: 0.8rem; color: var(--agent-muted, #94a3b8); }
+
+/* —— Booking cards grid —— */
+.agent-bookings-page #agentBookingsList.ab-list {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 1rem !important;
+  align-items: stretch;
+}
+
+/* Card */
+.agent-bookings-page .bk-card {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.75) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  height: 100%;
+}
+.agent-bookings-page .bk-card--pending { box-shadow: inset 0 3px 0 #eab308; }
+.agent-bookings-page .bk-card--confirmed,
+.agent-bookings-page .bk-card--fully-paid { box-shadow: inset 0 3px 0 #22c55e; }
+.agent-bookings-page .bk-card--partially-paid,
+.agent-bookings-page .bk-card--emi-active { box-shadow: inset 0 3px 0 #60a5fa; }
+
+/* Header: small thumb + property */
+.agent-bookings-page .bk-card__header {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.75rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.15);
+}
+.agent-bookings-page .bk-card__thumb-wrap {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(37, 99, 235, 0.15);
+}
+.agent-bookings-page .bk-card__thumb-wrap img.bk-card__thumb {
+  width: 36px !important;
+  height: 36px !important;
+  max-width: 36px !important;
+  max-height: 36px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+.agent-bookings-page .bk-card__thumb-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  opacity: 0.75;
+}
+.agent-bookings-page .bk-card__head-text {
+  flex: 1;
+  min-width: 0;
+}
+.agent-bookings-page .bk-card__head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.agent-bookings-page .bk-card__title {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--agent-text, #f1f5f9);
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.agent-bookings-page .bk-card__code {
+  margin: 0.2rem 0 0;
+  font-size: 0.68rem;
+  color: var(--agent-gold, #d4af37);
+  font-weight: 500;
+}
+.agent-bookings-page .bk-card__loc {
+  margin: 0.1rem 0 0;
+  font-size: 0.68rem;
+  color: var(--agent-muted, #94a3b8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.agent-bookings-page .bk-pill {
+  flex-shrink: 0;
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 0.2rem 0.45rem;
+  border-radius: 5px;
+  line-height: 1.2;
+  text-align: center;
+  max-width: 80px;
+}
+.agent-bookings-page .bk-pill--pending { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+.agent-bookings-page .bk-pill--confirmed,
+.agent-bookings-page .bk-pill--fully-paid { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+.agent-bookings-page .bk-pill--partially-paid,
+.agent-bookings-page .bk-pill--emi-active { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+
+/* Sections */
+.agent-bookings-page .bk-section {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.agent-bookings-page .bk-section__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--agent-muted, #64748b);
+}
+.agent-bookings-page .bk-section--buyer {
+  background: rgba(37, 99, 235, 0.06);
+}
+.agent-bookings-page .bk-buyer-name {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--agent-text, #e2e8f0);
+}
+.agent-bookings-page .bk-buyer-meta {
+  margin: 0.15rem 0 0;
+  font-size: 0.7rem;
+  color: var(--agent-muted, #94a3b8);
+  line-height: 1.4;
+  word-break: break-word;
+}
+.agent-bookings-page .bk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.agent-bookings-page .bk-tag {
+  font-size: 0.65rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--agent-muted, #94a3b8);
+}
+.agent-bookings-page .bk-tag--ok {
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.1);
+}
+.agent-bookings-page .bk-tag--warn {
+  color: #facc15;
+  border-color: rgba(234, 179, 8, 0.35);
+  background: rgba(234, 179, 8, 0.1);
+}
+
+/* Amount metrics */
+.agent-bookings-page .bk-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  padding: 0.55rem 0.85rem;
+  background: rgba(0, 0, 0, 0.18);
+}
+.agent-bookings-page .bk-metric {
+  text-align: center;
+  padding: 0.4rem 0.25rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.agent-bookings-page .bk-metric__label {
+  display: block;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--agent-muted, #64748b);
+  margin-bottom: 0.15rem;
+}
+.agent-bookings-page .bk-metric__val {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--agent-text, #f1f5f9);
+  font-variant-numeric: tabular-nums;
+}
+.agent-bookings-page .bk-metric--paid .bk-metric__val { color: #86efac; }
+.agent-bookings-page .bk-metric--due .bk-metric__val { color: #fbbf24; }
+
+.agent-bookings-page .bk-footer {
+  padding: 0.5rem 0.85rem;
+  font-size: 0.65rem;
+  color: var(--agent-muted, #94a3b8);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.agent-bookings-page .bk-footer code {
+  font-size: 0.62rem;
+  color: var(--agent-muted, #94a3b8);
+  word-break: break-all;
+}
+
+.agent-bookings-page .bk-details {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.agent-bookings-page .bk-details summary {
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--agent-gold, #d4af37);
+  list-style: none;
+}
+.agent-bookings-page .bk-details summary::-webkit-details-marker { display: none; }
+.agent-bookings-page .bk-details__body {
+  padding: 0 0.85rem 0.65rem;
+}
+.agent-bookings-page .bk-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  font-size: 0.72rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.agent-bookings-page .bk-breakdown-row dt {
+  margin: 0;
+  font-weight: 400;
+  color: var(--agent-muted, #94a3b8);
+}
+.agent-bookings-page .bk-breakdown-row dd {
+  margin: 0;
+  font-weight: 500;
+  color: var(--agent-text, #e2e8f0);
+  font-variant-numeric: tabular-nums;
+}
+.agent-bookings-page .bk-breakdown-row--total {
+  border-bottom: none;
+  border-top: 1px dashed rgba(212, 175, 55, 0.4);
+  margin-top: 0.25rem;
+  padding-top: 0.4rem;
+}
+.agent-bookings-page .bk-breakdown-row--total dt,
+.agent-bookings-page .bk-breakdown-row--total dd {
+  font-weight: 700;
+  color: var(--agent-gold, #d4af37);
+}
+.agent-bookings-page .bk-breakdown-row--disc dd { color: #86efac; }
+
+@media (max-width: 1100px) {
+  .agent-bookings-page .ab-kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .agent-bookings-page .ab-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .agent-bookings-page #agentBookingsList.ab-list {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 480px) {
+  .agent-bookings-page .ab-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  .agent-bookings-page .bk-metrics {
+    grid-template-columns: 1fr;
+  }
+}

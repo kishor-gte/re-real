@@ -1,0 +1,317 @@
+/* PG Property module — wizard, cards, gallery */
+@import url("portal-mobile.css");
+
+.pgp-wizard-wrap { position: relative; z-index: 1; }
+
+.pgp-progress {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.pgp-progress-step {
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+  padding: 0.65rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--pgo-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--pgo-glass-border);
+  transition: all 0.25s ease;
+}
+
+.pgp-progress-step.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--pgo-royal), #1d4ed8);
+  border-color: transparent;
+  box-shadow: 0 8px 24px var(--pgo-royal-glow);
+}
+
+.pgp-progress-step.done { color: var(--pgo-neon-cyan); border-color: rgba(34, 211, 238, 0.35); }
+
+.pgp-progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.pgp-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pgo-gold), var(--pgo-neon-cyan));
+  transition: width 0.35s ease;
+  width: 0%;
+}
+
+.pgp-step-panel { display: none; animation: pgpFadeIn 0.35s ease; }
+.pgp-step-panel.active { display: block; }
+
+@keyframes pgpFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pgp-glass-card {
+  background: var(--pgo-glass);
+  border: 1px solid var(--pgo-glass-border);
+  border-radius: var(--pgo-radius);
+  padding: 1.25rem;
+  backdrop-filter: blur(12px);
+  margin-bottom: 1rem;
+}
+
+.pgp-section-title { font-size: 1.05rem; font-weight: 700; margin: 0 0 1rem; color: var(--pgo-gold); }
+
+.pgp-floor-card, .pgp-room-card {
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  border-radius: var(--pgo-radius-sm);
+  padding: 1rem;
+  margin-bottom: 0.85rem;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.pgp-floor-head, .pgp-room-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.pgp-btn-icon {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #fca5a5;
+  border-radius: 8px;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.pgp-btn-add {
+  border: 1px dashed rgba(96, 165, 250, 0.5);
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--pgo-neon);
+  border-radius: var(--pgo-radius-sm);
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.pgp-amenity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.5rem;
+}
+
+.pgp-amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.pgp-amenity-item:has(input:checked) {
+  border-color: rgba(34, 211, 238, 0.45);
+  background: rgba(34, 211, 238, 0.08);
+}
+
+.pgp-dropzone {
+  border: 2px dashed rgba(212, 175, 55, 0.45);
+  border-radius: var(--pgo-radius);
+  padding: 2rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(212, 175, 55, 0.04);
+}
+
+.pgp-dropzone.dragover { border-color: var(--pgo-gold); background: rgba(212, 175, 55, 0.12); }
+
+.pgp-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.pgp-image-thumb {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--pgo-glass-border);
+}
+
+.pgp-image-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.pgp-image-thumb .pgp-remove-img {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.65);
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.pgp-image-thumb select {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 0.65rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+}
+
+.pgp-wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.pgp-field-error { color: #fca5a5; font-size: 0.78rem; margin-top: 0.25rem; }
+
+.pgp-manage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.pgp-manage-card {
+  background: var(--pgo-glass);
+  border: 1px solid var(--pgo-glass-border);
+  border-radius: var(--pgo-radius);
+  overflow: hidden;
+}
+
+.pgp-manage-cover {
+  height: 160px;
+  background: linear-gradient(135deg, #1e3a5f, #0f172a);
+  background-size: cover;
+  background-position: center;
+}
+
+.pgp-manage-body { padding: 1rem; }
+
+.pgp-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pgp-badge-draft { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; }
+.pgp-badge-published { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+.pgp-badge-inactive { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+
+.pgp-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pgp-active-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+}
+
+.pgp-active-pill.is-active { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+.pgp-active-pill.is-inactive { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+.pgp-active-pill.is-draft { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; }
+
+.pgp-toggle-active.is-deactivate { border-color: rgba(239, 68, 68, 0.5); color: #fca5a5; }
+.pgp-toggle-active.is-activate { border-color: rgba(34, 197, 94, 0.5); color: #86efac; }
+
+.pgp-gallery-main {
+  border-radius: var(--pgo-radius);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: #000;
+  margin-bottom: 1rem;
+}
+
+.pgp-gallery-main img { width: 100%; height: 100%; object-fit: contain; }
+
+.pgp-gallery-thumbs { display: flex; gap: 0.5rem; overflow-x: auto; }
+
+.pgp-gallery-thumbs img {
+  width: 88px;
+  height: 66px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  opacity: 0.75;
+}
+
+.pgp-gallery-thumbs img.active { border-color: var(--pgo-gold); opacity: 1; }
+
+.pgp-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.pgp-sharing-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 0.5rem;
+  align-items: end;
+  margin-bottom: 0.5rem;
+}
+
+#totalCapacity[readonly], #availableBeds[readonly] {
+  background: rgba(255, 255, 255, 0.06);
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+@media (max-width: 992px) {
+  .pgp-detail-grid,
+  .pgp-form-row-2,
+  .pgp-form-row-3,
+  .pgp-sharing-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pgp-progress {
+    flex-wrap: wrap;
+  }
+
+  .pgp-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .pgp-wizard-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pgp-wizard-actions .btn {
+    width: 100%;
+  }
+}

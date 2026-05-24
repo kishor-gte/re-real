@@ -1,0 +1,92 @@
+/* Agent & Admin subscription UI */
+@import url("portal-mobile.css");
+
+.sub-hero {
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.15), rgba(15, 23, 42, 0.9));
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+.sub-hero h1 { font-size: 1.6rem; margin: 0 0 0.5rem; color: #f8fafc; }
+.sub-hero p { color: #94a3b8; margin: 0; }
+.sub-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.sub-kpi {
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+}
+.sub-kpi label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.04em; }
+.sub-kpi strong { display: block; font-size: 1.35rem; color: #d4af37; margin-top: 0.25rem; }
+.sub-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.sub-plan-card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.sub-plan-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+.sub-plan-card.recommended { border-color: #d4af37; }
+.sub-plan-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: #d4af37;
+  color: #0f172a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+.sub-plan-price { font-size: 2rem; font-weight: 700; color: #f8fafc; }
+.sub-plan-price small { font-size: 0.9rem; color: #94a3b8; font-weight: 400; }
+.sub-plan-features { list-style: none; padding: 0; margin: 1rem 0; }
+.sub-plan-features li { color: #cbd5e1; font-size: 0.88rem; padding: 0.35rem 0; padding-left: 1.25rem; position: relative; }
+.sub-plan-features li::before { content: "✓"; position: absolute; left: 0; color: #22c55e; }
+.sub-compare-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.sub-compare-table th, .sub-compare-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid rgba(148, 163, 184, 0.15); }
+.sub-compare-table th { color: #94a3b8; text-align: left; }
+.sub-banner-limit {
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.15), rgba(201, 162, 39, 0.12));
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  color: #fecaca;
+}
+.admin-sub-table { width: 100%; font-size: 0.88rem; }
+.admin-sub-table th { color: #94a3b8; font-weight: 600; }
+.admin-sub-table td, .admin-sub-table th { padding: 0.6rem 0.5rem; border-bottom: 1px solid rgba(148, 163, 184, 0.12); vertical-align: middle; }
+.status-pill { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; }
+.status-pill.active { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+.status-pill.inactive { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
+.status-pill.pending { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+.admin-nav-section { color: #64748b; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.75rem 1rem 0.25rem; list-style: none; }
+
+@media (max-width: 992px) {
+  .sub-plans-grid,
+  .sub-kpi-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .sub-plan-price { font-size: 1.5rem; }
+  .sub-compare-table { font-size: 0.8rem; }
+}
