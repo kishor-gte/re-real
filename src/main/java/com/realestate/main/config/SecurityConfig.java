@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,6 +16,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.realestate.main.security.CustomUserDetailsService;
 import com.realestate.main.security.JwtAuthenticationEntryPoint;
 import com.realestate.main.security.JwtAuthenticationFilter;
+import com.realestate.main.security.RateLimitingFilter;
+import org.springframework.beans.factory.annotation.Value;
+import com.realestate.main.security.SecurityHeadersFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -32,9 +36,17 @@ public class SecurityConfig {
 		this.userDetailsService = userDetailsService;
 	}
 
+	@Value("${APP_ENFORCE_HTTPS:false}")
+	private boolean enforceHttps;
+
+	private final RateLimitingFilter rateLimitingFilter = new RateLimitingFilter();
+	private final SecurityHeadersFilter securityHeadersFilter = new SecurityHeadersFilter();
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable())
+			http.csrf(csrf -> csrf
+					.ignoringRequestMatchers("/api/**")
+					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.userDetailsService(userDetailsService)
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
@@ -64,7 +76,13 @@ public class SecurityConfig {
 						.requestMatchers("/user/dashboard", "/user/enquiries", "/user/logout", "/api/user/**")
 								.authenticated()
 						.anyRequest().permitAll())
-				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+					.addFilterBefore(securityHeadersFilter, UsernamePasswordAuthenticationFilter.class)
+					.addFilterBefore(rateLimitingFilter, UsernamePasswordAuthenticationFilter.class)
+					.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+		if (enforceHttps) {
+			http.requiresChannel(channel -> channel.anyRequest().requiresSecure());
+		}
 
 		return http.build();
 	}

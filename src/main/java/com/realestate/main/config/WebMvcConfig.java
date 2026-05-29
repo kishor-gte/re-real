@@ -22,6 +22,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		this.pgOwnerAuthInterceptor = pgOwnerAuthInterceptor;
 	}
 
+	@org.springframework.beans.factory.annotation.Value("${APP_STORAGE_PROVIDER:local}")
+	private String storageProvider;
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(adminAuthInterceptor)
@@ -57,6 +60,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.addResourceLocations("/css/", "classpath:/static/css/");
 		registry.addResourceHandler("/js/**")
 				.addResourceLocations("/js/", "classpath:/static/js/");
-		registry.addResourceHandler("/uploads/**").addResourceLocations("file:uploads/");
+		if (!"s3".equalsIgnoreCase(storageProvider)) {
+			registry.addResourceHandler("/uploads/**").addResourceLocations("file:uploads/");
+		}
 	}
 }

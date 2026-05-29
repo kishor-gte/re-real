@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build and run tests
+        run: mvn -B -DskipTests=false test package
+
+      - name: Run OWASP Dependency Check
+        run: mvn org.owasp:dependency-check-maven:check -Dformat=ALL || true
+
+      - name: Snyk scan (optional)
+        if: secrets.SNYK_TOKEN != ''
+        uses: snyk/actions@master
+        with:
+          args: test --all-projects
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Upload test reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: target/surefire-reports || target/failsafe-reports || target/site/jacoco

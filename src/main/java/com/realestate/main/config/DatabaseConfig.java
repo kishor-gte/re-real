@@ -10,7 +10,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -52,6 +52,16 @@ public class DatabaseConfig {
 	@Bean
 	@Primary
 	public DataSource dataSource(DataSourceProperties properties) {
+		// If DB credentials are not fully configured (common in local/test runs), skip proactive DB creation
+		if (username == null || username.isBlank() || password == null || password.isBlank()) {
+			log.warn("DB credentials incomplete (spring.datasource.username/password). Skipping DB creation and migrations.");
+			// Prevent Flyway and Hibernate DDL from running in environments without DB credentials
+			System.setProperty("spring.flyway.enabled", "false");
+			System.setProperty("spring.jpa.hibernate.ddl-auto", "none");
+			System.setProperty("spring.jpa.generate-ddl", "false");
+			return properties.initializeDataSourceBuilder().build();
+		}
+
 		createDatabaseIfNotExists();
 		removeDuplicateForeignKeys();
 		migrateUsersPhoneColumn();

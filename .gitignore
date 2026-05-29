@@ -1,3 +1,16 @@
+# Logs
+/logs
+*.log
+
+# Maven
+/target/
+/.m2/
+
+# Environment files
+.env
+
+# Uploads (local)
+/uploads/
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar

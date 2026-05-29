@@ -54,13 +54,16 @@ public class RtcApiController {
 	@Value("${app.upload.rtc-dir:uploads/rtc}")
 	private String rtcUploadDir;
 
+	private final com.realestate.main.service.FileStorageService fileStorageService;
+
 	public RtcApiController(RtcAuthService rtcAuthService, ChatRoomService chatRoomService, ChatService chatService,
-			PresenceService presenceService, VoiceCallService voiceCallService) {
+			PresenceService presenceService, VoiceCallService voiceCallService, com.realestate.main.service.FileStorageService fileStorageService) {
 		this.rtcAuthService = rtcAuthService;
 		this.chatRoomService = chatRoomService;
 		this.chatService = chatService;
 		this.presenceService = presenceService;
 		this.voiceCallService = voiceCallService;
+		this.fileStorageService = fileStorageService;
 	}
 
 	@PostMapping("/chat/open")
@@ -112,12 +115,7 @@ public class RtcApiController {
 		if (file.getSize() > 10 * 1024 * 1024) {
 			return ResponseEntity.badRequest().body(ApiResponse.fail("Max file size is 10MB"));
 		}
-		Path dir = Paths.get(rtcUploadDir).toAbsolutePath().normalize();
-		Files.createDirectories(dir);
-		String stored = UUID.randomUUID() + "." + ext;
-		Path target = dir.resolve(stored);
-		Files.copy(file.getInputStream(), target);
-		String url = "/uploads/rtc/" + stored;
+		String url = fileStorageService.storeRtcFile(file);
 		String type = file.getContentType() != null ? file.getContentType() : ext;
 		ChatMessageDto dto = chatService.sendWithAttachment(roomId, me, message, url, type, replyToMessageId);
 		return ResponseEntity.ok(ApiResponse.ok("Uploaded", dto));

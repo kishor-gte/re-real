@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.realestate.main.entity.PgSubscriptionPlan;
 import com.realestate.main.entity.enums.SubscriptionPlanStatus;
@@ -15,6 +18,10 @@ import com.realestate.main.repository.PgSubscriptionPlanRepository;
 public class PgSubscriptionDataInitializer implements CommandLineRunner {
 
 	private final PgSubscriptionPlanRepository planRepository;
+	private static final Logger log = LoggerFactory.getLogger(PgSubscriptionDataInitializer.class);
+
+	@Value("${spring.datasource.username:}")
+	private String datasourceUsername;
 
 	public PgSubscriptionDataInitializer(PgSubscriptionPlanRepository planRepository) {
 		this.planRepository = planRepository;
@@ -22,6 +29,11 @@ public class PgSubscriptionDataInitializer implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
+		if (datasourceUsername == null || datasourceUsername.isBlank()) {
+			log.warn("Skipping PgSubscriptionDataInitializer because datasource username is not configured.");
+			return;
+		}
+
 		seedIfMissing("PG_FREE", "Free Plan", BigDecimal.ZERO, 365, 1, 10, 0, false, false, false, false,
 				"1 PG listing, basic visibility, limited inquiries.", 0, false);
 		seedIfMissing("PG_STARTER", "Starter Plan", new BigDecimal("499"), 30, 5, 50, 1, true, false, false, false,

@@ -1,0 +1,5 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.realestate.main.config.DBPropertiesEnvironmentPostProcessor,\
+com.realestate.main.config.AwsSecretsEnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.realestate.main.config.AwsSecretsEnvironmentPostProcessor
